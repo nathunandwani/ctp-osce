@@ -36,5 +36,7 @@ for i in lines:
                         bad = 1
                         break
             if bad == 0:
+                pe = arr[8].split("[")[1].split("]")[0]
+                print "!mona rop -m " + pe
                 print i
             
