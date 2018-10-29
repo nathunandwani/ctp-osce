@@ -1,4 +1,4 @@
-exclude = ["\x00", "\x01", "\xf8"]
+exclude = []
 temp = 'all_chars = (\n"'
 for i in range(0, 256):
     if i % 16 == 0 and i != 0:
