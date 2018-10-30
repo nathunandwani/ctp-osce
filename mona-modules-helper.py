@@ -14,6 +14,7 @@ badchars = (
 )
 
 contents = ""
+rop_commands = ""
 with open("mona-modules.txt", "r") as f:
     contents = f.read()
 lines = contents.split("\n")
@@ -37,6 +38,6 @@ for i in lines:
                         break
             if bad == 0:
                 pe = arr[8].split("[")[1].split("]")[0]
-                print "!mona rop -m " + pe
+                rop_commands += "!mona rop -m " + pe + "\n"
                 print i
-            
+print "\n\n" + rop_commands
