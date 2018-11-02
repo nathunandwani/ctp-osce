@@ -2,12 +2,6 @@
 #Ex: AND EBX, ?
 #    AND ECX, ?
 
-fourbytesh = "\x66\x81\xca\xff"
-#fourbytesh = "\x0f\x42\x52\x6A"
-fourbytesh = "\x02\x58\xcd\x2e"
-fourbytesh = "\x3c\x05\x5a\x74"
-fourbytesh = "\xef\xb8\x54\x30"
-
 badchars = (
     "\x00\x0A\x0D"
     "\x2F"
@@ -83,27 +77,33 @@ for k, v in basic_cmds.items():
     if found == 0:
         good.append(hex(ord(k)) + " - " + v)
 
-print "Commands allowed based on bad character list:"
-for i in good:
-    print i
+def sub_encoder(max_limit, shellcode):
+    print "SUB Encoder"
+    sub_values = ""
+    for i in shellcode:
+        current = ord(i)
+        counter = 0
+        #if current <= max_limit:
+        #    while 
 
-print ""
-print "Commands not allowed based on bad character list:"
-for i in bad:
-    print i
-print ""
-
-def operator(operation):
+def operator(operation, fourbytesh):
     if operation == "XOR" and "\x35" in badchars:
         return 0
     if operation == "ADD" and "\x05" in badchars:
         return 0
     if operation == "SUB" and "\x2D" in badchars:
         return 0
+    
+    machine_code = "\x35"
+    if operation == "ADD":
+        machine_code = "\x05"
+    if operation == "SUB":
+        machine_code == "\x2D"
     print "Encoding with " + operation
     decoder = operation + " EAX, "
     encoded = ""
     all_success = 1
+    d_machine_code = ""
     for i in fourbytesh:
         success = 0
         for j in goodchars:
@@ -115,6 +115,7 @@ def operator(operation):
                 result = ord(i) - j
             if result in goodchars and result >= 0 and result <= 255:
                 decoder += "%0.2X" % result
+                d_machine_code += "%0.2X" % result
                 encoded += "%0.2X" % j
                 success = 1
                 break
@@ -123,13 +124,33 @@ def operator(operation):
             all_success = 0
     if all_success == 1:
         print "Encoded: " + encoded + ", Decoder: " + decoder
+        print "Encoded (B): " + encoded + ", Decoder (B): " + "%0.2X" % ord(machine_code) + d_machine_code
     return all_success
+
+def twoscomplement(val):
+    v = tohex(0 - toint(val), 32)
+    v = v.replace("0x", "")
+    v = v.replace("L", "")
+    return '"' + ''.join(['\\x' + v[j:j+2] for j in range(0, len(v), 2)]) + '"'
+
+def toint(val):
+    temp = ""
+    for i in val:
+        temp += "%0.2X" % ord(i)
+    return int(temp, 16)   
 
 def tohex(val, nbits):
   return hex((val + (1 << nbits)) % (1 << nbits))
 
+def printshellcode(val):
+    temp = ""
+    for i in val:
+        temp += "\\x%0.2X" % ord(i)
+    return '"' + temp + '"'
+
 def zero_reg(maximum):
     counter = 0
+    tmpbin = ""
     if ord("\x25") in goodchars:
         for i in goodchars:
             for j in goodchars:
@@ -139,9 +160,9 @@ def zero_reg(maximum):
                     first = "AND EAX, " + x * 4
                     second = "AND EAX, " + y * 4
                     print "Can be used to clear EAX: "
-                    print '"\\x25\\x' + x + '\\x' + x + '\\x' + x + '\\x' + x + '" # ' + first
-                    print '"\\x25\\x' + y + '\\x' + y + '\\x' + y + '\\x' + y + '" # ' + second
-                    print ""
+                    print '"\\x25\\x' + x + '\\x' + x + '\\x' + x + '\\x' + x + '" # ' + first + " # BIN => 25" + x * 4 
+                    print '"\\x25\\x' + y + '\\x' + y + '\\x' + y + '\\x' + y + '" # ' + second + " # BIN => 25" + y * 4
+                    print 'For ollydbg binary paste: 25' + x * 4 + '25' + y * 4 
                     counter += 1
                     if counter == maximum:
                         print ""
@@ -149,16 +170,32 @@ def zero_reg(maximum):
     if ord("\x33") in goodchars and ord("\xC0") in goodchars:
         print "Can be used to clear EAX: "
         print '"\\x33\\xC0" # XOR EAX, EAX'
-        
-zero_reg(5)     
 
-#fourbytesh = fourbytesh[::-1]
-#if operator("XOR") == 0:
-#    print "XOR FAILED"
-#    print ""
-#    if operator("ADD") == 0:
-#        print "ADD FAILED"
-#        print ""
-#        if operator("SUB") == 0:
-#            print "SUB FAILED"
-#            print ""
+#print "Commands allowed based on bad character list:"
+#for i in good:
+#    print i
+
+#print ""
+#print "Commands not allowed based on bad character list:"
+#for i in bad:
+#    print i
+#print ""
+
+fourbytesh = "\x0f\x42\x52\x6A"
+
+print "Original Shellcode: \t" + printshellcode(fourbytesh)
+print ""
+print "Sub Encoder"
+print "Reversed: \t\t" + printshellcode(fourbytesh[::-1])
+print "Two's Complement: \t" + twoscomplement(fourbytesh[::-1])
+print ""
+zero_reg(1)     
+if operator("XOR", fourbytesh[::-1]) == 0:
+    print "XOR FAILED"
+    print ""
+    if operator("ADD", fourbytesh[::-1]) == 0:
+        print "ADD FAILED"
+        print ""
+        if operator("SUB", fourbytesh[::-1]) == 0:
+            print "SUB FAILED"
+            print ""
