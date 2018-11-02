@@ -149,10 +149,13 @@ def sub_encoder(max_limit, shellcode):
         tmpterm2 += '\\x' + i
     for i in subtract_term3:
         tmpterm3 += '\\x' + i
-    print '"\\x35' + tmpterm1 + '"' + " # SUB EAX, " + ''.join(list(reversed(subtract_term1))) + " # BIN => 35" + ''.join(subtract_term1)
-    print '"\\x35' + tmpterm2 + '"' + " # SUB EAX, " + ''.join(list(reversed(subtract_term2))) + " # BIN => 35" + ''.join(subtract_term2)
+    print '"\\x2D' + tmpterm1 + '"' + " # SUB EAX, " + ''.join(list(reversed(subtract_term1))) + " # BIN => 2D" + ''.join(subtract_term1)
+    print '"\\x2D' + tmpterm2 + '"' + " # SUB EAX, " + ''.join(list(reversed(subtract_term2))) + " # BIN => 2D" + ''.join(subtract_term2)
+    olly = "For ollydbg binary paste: 2D" + ''.join(subtract_term1) + "2D" + ''.join(subtract_term2)
     if threeterms:
-        print '"\\x35' + tmpterm3 + '"' + " # SUB EAX, " + ''.join(list(reversed(subtract_term3))) + " # BIN => 35" + ''.join(subtract_term3)
+        print '"\\x2D' + tmpterm3 + '"' + " # SUB EAX, " + ''.join(list(reversed(subtract_term3))) + " # BIN => 2D" + ''.join(subtract_term3)
+        olly += "2D" + ''.join(subtract_term3)
+    print olly
 
 def operator(operation, fourbytesh):
     if operation == "XOR" and "\x35" in badchars:
@@ -166,7 +169,7 @@ def operator(operation, fourbytesh):
     if operation == "ADD":
         machine_code = "\x05"
     if operation == "SUB":
-        machine_code == "\x2D"
+        machine_code = "\x2D"
     print "Encoding with " + operation
     decoder = operation + " EAX, "
     encoded = ""
@@ -249,8 +252,9 @@ def zero_reg(maximum):
 #    print i
 #print ""
 
-fourbytesh = "\xaf\xea\x75\xaf"
-fourbytesh = "\x2e\xcd\x58\x02"
+#fourbytesh = "\xaf\xea\x75\xaf"
+#fourbytesh = "\x2e\xcd\x58\x02"
+fourbytesh = "\x74\x5a\x05\x3c"
 print "Original Shellcode: \t" + printshellcode(fourbytesh)
 print ""
 print "Sub Encoder"
