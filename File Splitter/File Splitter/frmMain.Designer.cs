@@ -33,6 +33,10 @@
             this.btnBrowseFile = new System.Windows.Forms.Button();
             this.txtDirectoryOutput = new System.Windows.Forms.TextBox();
             this.btnBrowseDirectory = new System.Windows.Forms.Button();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.btnSplit = new System.Windows.Forms.Button();
+            this.txtNumBytes = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -79,11 +83,42 @@
             this.btnBrowseDirectory.UseVisualStyleBackColor = true;
             this.btnBrowseDirectory.Click += new System.EventHandler(this.btnBrowseDirectory_Click);
             // 
+            // btnSplit
+            // 
+            this.btnSplit.Location = new System.Drawing.Point(11, 111);
+            this.btnSplit.Name = "btnSplit";
+            this.btnSplit.Size = new System.Drawing.Size(355, 33);
+            this.btnSplit.TabIndex = 4;
+            this.btnSplit.Text = "Split";
+            this.btnSplit.UseVisualStyleBackColor = true;
+            this.btnSplit.Click += new System.EventHandler(this.btnSplit_Click);
+            // 
+            // txtNumBytes
+            // 
+            this.txtNumBytes.Location = new System.Drawing.Point(12, 78);
+            this.txtNumBytes.Name = "txtNumBytes";
+            this.txtNumBytes.Size = new System.Drawing.Size(227, 27);
+            this.txtNumBytes.TabIndex = 5;
+            this.txtNumBytes.Text = "100";
+            this.txtNumBytes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(245, 81);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(121, 20);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Byte Increment";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(385, 205);
+            this.ClientSize = new System.Drawing.Size(378, 157);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtNumBytes);
+            this.Controls.Add(this.btnSplit);
             this.Controls.Add(this.btnBrowseDirectory);
             this.Controls.Add(this.txtDirectoryOutput);
             this.Controls.Add(this.btnBrowseFile);
@@ -110,6 +145,10 @@
         private System.Windows.Forms.Button btnBrowseFile;
         private System.Windows.Forms.TextBox txtDirectoryOutput;
         private System.Windows.Forms.Button btnBrowseDirectory;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.Button btnSplit;
+        private System.Windows.Forms.TextBox txtNumBytes;
+        private System.Windows.Forms.Label label1;
     }
 }
 
