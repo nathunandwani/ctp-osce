@@ -1,0 +1,8 @@
+C:\Users\nandw\Desktop\OSCE\CTP-OSCE Tools\File Splitter\File Splitter\bin\Debug\File Splitter.exe
+C:\Users\nandw\Desktop\OSCE\CTP-OSCE Tools\File Splitter\File Splitter\bin\Debug\File Splitter.pdb
+C:\Users\nandw\Desktop\OSCE\CTP-OSCE Tools\File Splitter\File Splitter\obj\Debug\File Splitter.csprojResolveAssemblyReference.cache
+C:\Users\nandw\Desktop\OSCE\CTP-OSCE Tools\File Splitter\File Splitter\obj\Debug\File_Splitter.frmMain.resources
+C:\Users\nandw\Desktop\OSCE\CTP-OSCE Tools\File Splitter\File Splitter\obj\Debug\File_Splitter.Properties.Resources.resources
+C:\Users\nandw\Desktop\OSCE\CTP-OSCE Tools\File Splitter\File Splitter\obj\Debug\File Splitter.csproj.GenerateResource.Cache
+C:\Users\nandw\Desktop\OSCE\CTP-OSCE Tools\File Splitter\File Splitter\obj\Debug\File Splitter.exe
+C:\Users\nandw\Desktop\OSCE\CTP-OSCE Tools\File Splitter\File Splitter\obj\Debug\File Splitter.pdb
