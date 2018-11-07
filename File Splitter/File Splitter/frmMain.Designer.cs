@@ -99,7 +99,7 @@
             this.txtNumBytes.Name = "txtNumBytes";
             this.txtNumBytes.Size = new System.Drawing.Size(227, 27);
             this.txtNumBytes.TabIndex = 5;
-            this.txtNumBytes.Text = "100";
+            this.txtNumBytes.Text = "1000";
             this.txtNumBytes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label1

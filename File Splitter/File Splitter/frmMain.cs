@@ -66,7 +66,7 @@ namespace File_Splitter
                 for (int i = counter; i < file.Length; i++) 
                 {
                     List<byte> splitted = new List<byte>();
-                    for (int j = 0; j < i; j++) 
+                    for (int j = 0; j < i && j < file.Length; j++) 
                     {
                         splitted.Add(file[j]);
                     }
