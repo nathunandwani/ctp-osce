@@ -33,7 +33,7 @@ badchars = (
 )
 
 contents = ""
-with open("rop1.txt", "r") as f:
+with open("ppr1.txt", "r") as f:
     contents = f.read()
 lines = contents.split("\n")
 print "\nPotential Candidates without Bad Characters\n"
